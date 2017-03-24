@@ -34,6 +34,8 @@ public class DemoActivity extends AppCompatActivity {
         csv6.setStopTime(Long.valueOf("14903387320000"));
         csv7.setStopTime(Long.valueOf("14903387320000"));
         csv8.setStopTime(Long.valueOf("14903387320000"));
+        csv8.setTextViewBgColor(R.color.colorPrimary);
+        csv8.setTextViewPadding(50, 50, 50, 50);
         csv9.setStopTime(Long.valueOf("14903387320000"));
         csv10.setStopTime(Long.valueOf("14903387320000"));
 

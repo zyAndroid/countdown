@@ -10,56 +10,66 @@
         android:id="@+id/csv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         countdown:color_text="@android:color/holo_red_light" />
 
     <com.zy.lib.countdown.CountDownView
         android:id="@+id/csv2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         countdown:text_size="30" />
 
     <com.zy.lib.countdown.CountDownView
         android:id="@+id/csv3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         countdown:color_bg="@android:color/holo_red_light" />
+
+    <com.zy.lib.countdown.CountDownView
+        android:id="@+id/csv8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp" />
 
     <com.zy.lib.countdown.CountDownView
         android:id="@+id/csv4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        countdown:showBorder="true" />
+        android:layout_marginTop="10dp"
+        countdown:setDrawable_sub="@drawable/boder_yuan" />
 
     <com.zy.lib.countdown.CountDownView
         android:id="@+id/csv5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        countdown:showBorder_sub="true" />
+        android:layout_marginTop="10dp"
+        countdown:setDrawable="@drawable/boder_yuan" />
 
     <com.zy.lib.countdown.CountDownView
         android:id="@+id/csv6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        countdown:setDrawable="@drawable/quan" />
+        android:layout_marginTop="10dp"
+        countdown:setDrawable="@mipmap/bejing" />
 
     <com.zy.lib.countdown.CountDownView
         android:id="@+id/csv7"
         android:layout_width="wrap_content"
-        countdown:setDrawable_sub="@drawable/quan"
-        android:layout_height="wrap_content" />
-
-    <com.zy.lib.countdown.CountDownView
-        android:id="@+id/csv8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        countdown:setDrawable_sub="@mipmap/bejing" />
 
     <com.zy.lib.countdown.CountDownView
         android:id="@+id/csv9"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp" />
 
     <com.zy.lib.countdown.CountDownView
         android:id="@+id/csv10"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp" />
 </LinearLayout>

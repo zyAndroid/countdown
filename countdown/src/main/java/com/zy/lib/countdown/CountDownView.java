@@ -29,13 +29,14 @@ public class CountDownView extends LinearLayout {
     private String color_bg;
     private String color_text;
     private int text_size = 18;
-    private boolean showBorder = false;
-    private boolean showBorder_sub = false;
     private long time_long;
     private int hh = 0, mm = 0, ss = 0;
-    private TextView tv_h, tv_s, tv_m, tv_colon, tv_colon2;
     private Drawable setDrawable;
     private Drawable setDrawable_sub;
+    private TextView tv_h, tv_s, tv_m, tv_colon, tv_colon2;
+    private LinearLayout ll;
+    private TextView[] textViews2;
+    private TextView[] textViews;
 
     public CountDownView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -51,8 +52,6 @@ public class CountDownView extends LinearLayout {
         color_bg = typedArray.getString(R.styleable.countdown_color_bg);
         text_size = typedArray.getInteger(R.styleable.countdown_text_size, text_size);
         color_text = typedArray.getString(R.styleable.countdown_color_text);
-        showBorder = typedArray.getBoolean(R.styleable.countdown_showBorder, false);
-        showBorder_sub = typedArray.getBoolean(R.styleable.countdown_showBorder_sub, false);
         setDrawable = typedArray.getDrawable(R.styleable.countdown_setDrawable);
         setDrawable_sub = typedArray.getDrawable(R.styleable.countdown_setDrawable_sub);
         if (color_bg != null)
@@ -65,8 +64,6 @@ public class CountDownView extends LinearLayout {
             setDrawable(setDrawable);
         if (setDrawable_sub != null)
             setDrawable_sub(setDrawable_sub);
-        setShowBorder_sub(showBorder_sub);
-        setShowBorder(showBorder);
         typedArray.recycle();
     }
 
@@ -81,33 +78,72 @@ public class CountDownView extends LinearLayout {
         getNetTime.execute(time_long);
     }
 
-    public void setColor_bg(String color_bg) {
+    private void setColor_bg(String color_bg) {
         this.color_bg = color_bg;
     }
 
-    public void setDrawable(Drawable drawable) {
+    private void setDrawable(Drawable drawable) {
         this.setDrawable = drawable;
     }
 
-    public void setDrawable_sub(Drawable drawable_sub) {
+    private void setDrawable_sub(Drawable drawable_sub) {
         this.setDrawable_sub = drawable_sub;
     }
 
-    public void setTextSize(int size) {
+    private void setTextSize(int size) {
         this.text_size = size;
     }
 
-    public void setTextColor(String color) {
+    private void setTextColor(String color) {
         this.color_text = color;
     }
 
-    public void setShowBorder_sub(boolean b) {
-        this.showBorder_sub = b;
-
+    public void setLinearLayoutMargin(int left, int top, int right, int bottom) {
+        LayoutParams lp = (LayoutParams) ll.getLayoutParams();
+        lp.setMargins(left, top, right, bottom);
+        ll.setLayoutParams(lp);
+        invalidate();
     }
 
-    public void setShowBorder(boolean b) {
-        this.showBorder = b;
+    public void setLinearLayoutPadding(int left, int top, int right, int bottom) {
+        ll.setPadding(left, top, right, bottom);
+        invalidate();
+    }
+
+    public void setTextViewMargin(int left, int top, int right, int bottom) {
+        for (int i = 0; i < textViews2.length; i++) {
+            LayoutParams lp = (LayoutParams) textViews2[i].getLayoutParams();
+            lp.setMargins(left, top, right, bottom);
+            textViews2[i].setLayoutParams(lp);
+        }
+        invalidate();
+    }
+
+    public void setTextViewPadding(int left, int top, int right, int bottom) {
+        for (int i = 0; i < textViews2.length; i++) {
+            textViews2[i].setPadding(left, top, right, bottom);
+        }
+        invalidate();
+    }
+
+    public void setLinearLayoutDrawable(Drawable d) {
+        ll.setBackground(d);
+    }
+
+    public void setTextViewDrawable(Drawable d) {
+        for (int i = 0; i < textViews2.length; i++) {
+            textViews2[i].setBackground(d);
+        }
+    }
+
+    public void setLinearLayoutBgColor(int color) {
+        ll.setBackgroundColor(color);
+    }
+
+    public void setTextViewBgColor(int color) {
+        for (int i = 0; i < textViews2.length; i++) {
+            textViews2[i].setBackgroundColor(getResources().getColor(color));
+        }
     }
 
     //这里开始到最后是倒计时。
@@ -208,12 +244,10 @@ public class CountDownView extends LinearLayout {
         return s;
     }
 
+
     public void CreatView() {
-        LinearLayout view = new LinearLayout(mContext);
-        LayoutParams lp = (LayoutParams) view.getLayoutParams();
-//        lp.weight = LayoutParams.WRAP_CONTENT;
-//        lp.height = LayoutParams.WRAP_CONTENT;
-//        view.setLayoutParams(lp);
+        ll = new LinearLayout(mContext);
+        LayoutParams lp = (LayoutParams) ll.getLayoutParams();
         tv_h = new TextView(mContext);
         tv_m = new TextView(mContext);
         tv_s = new TextView(mContext);
@@ -221,8 +255,8 @@ public class CountDownView extends LinearLayout {
         tv_colon2 = new TextView(mContext);
         tv_colon.setText(":");
         tv_colon2.setText(":");
-        TextView[] textViews = {tv_s, tv_m, tv_h, tv_colon, tv_colon2};
-        TextView[] textViews2 = {tv_s, tv_m, tv_h};
+        textViews2 = new TextView[]{tv_s, tv_m, tv_h};
+        textViews = new TextView[]{tv_s, tv_m, tv_h, tv_colon, tv_colon2};
         for (int i = 0; i < textViews.length; i++) {
             if (!TextUtils.isEmpty(color_text))
                 textViews[i].setTextColor(Color.parseColor(color_text));
@@ -232,20 +266,16 @@ public class CountDownView extends LinearLayout {
         for (int i = 0; i < textViews2.length; i++) {
             if (setDrawable_sub != null)
                 textViews[i].setBackground(setDrawable_sub);
-            if (showBorder_sub)
-                textViews[i].setBackground(getResources().getDrawable(R.drawable.boder_yuan));
         }
-        if (showBorder)
-            view.setBackground(getResources().getDrawable(R.drawable.boder_yuan));
         if (setDrawable != null)
-            view.setBackground(setDrawable);
+            ll.setBackground(setDrawable);
         if (!TextUtils.isEmpty(color_bg))
-            view.setBackgroundColor(Color.parseColor(color_bg));
-        view.addView(tv_h);
-        view.addView(tv_colon);
-        view.addView(tv_m);
-        view.addView(tv_colon2);
-        view.addView(tv_s);
-        addView(view);
+            ll.setBackgroundColor(Color.parseColor(color_bg));
+        ll.addView(tv_h);
+        ll.addView(tv_colon);
+        ll.addView(tv_m);
+        ll.addView(tv_colon2);
+        ll.addView(tv_s);
+        addView(ll);
     }
 }
