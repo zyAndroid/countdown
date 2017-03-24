@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -32,7 +33,7 @@ public class CountDownView extends LinearLayout {
     private boolean showBorder_sub = false;
     private long time_long;
     private int hh = 0, mm = 0, ss = 0;
-    private TextView tv_h, tv_s, tv_m;
+    private TextView tv_h, tv_s, tv_m, tv_colon, tv_colon2;
     private LinearLayout ll_linearlayout;
     private Drawable setDrawable;
     private Drawable setDrawable_sub;
@@ -40,19 +41,10 @@ public class CountDownView extends LinearLayout {
     public CountDownView(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.mContext = context;
-        inntView(context);
         initAttributes(attrs);
+        CreatView();
     }
 
-    public void inntView(Context context) {
-        View v = LayoutInflater.from(context).inflate(R.layout.w_countdown,
-                null);
-        tv_h = (TextView) v.findViewById(R.id.tv_h);
-        tv_s = (TextView) v.findViewById(R.id.tv_s);
-        tv_m = (TextView) v.findViewById(R.id.tv_m);
-        ll_linearlayout = (LinearLayout) v.findViewById(R.id.ll_linearlayout);
-        addView(v);
-    }
 
     private void initAttributes(AttributeSet attrs) {
         TypedArray typedArray = mContext.obtainStyledAttributes(attrs,
@@ -92,43 +84,32 @@ public class CountDownView extends LinearLayout {
     }
 
     public void setColor_bg(String color_bg) {
-        ll_linearlayout.setBackgroundColor(Color.parseColor(color_bg));
+        this.color_bg = color_bg;
     }
 
     public void setDrawable(Drawable drawable) {
-        ll_linearlayout.setBackground(drawable);
+        this.setDrawable = drawable;
     }
 
     public void setDrawable_sub(Drawable drawable_sub) {
-        tv_h.setBackground(drawable_sub);
-        tv_m.setBackground(drawable_sub);
-        tv_s.setBackground(drawable_sub);
+        this.setDrawable_sub = drawable_sub;
     }
 
     public void setTextSize(int size) {
-        tv_h.setTextSize(size);
-        tv_m.setTextSize(size);
-        tv_s.setTextSize(size);
+        this.text_size = size;
     }
 
     public void setTextColor(String color) {
-        tv_h.setTextColor(Color.parseColor(color));
-        tv_m.setTextColor(Color.parseColor(color));
-        tv_s.setTextColor(Color.parseColor(color));
+        this.color_text = color;
     }
 
     public void setShowBorder_sub(boolean b) {
-        if (b) {
-            tv_h.setBackground(getResources().getDrawable(R.drawable.boder_yuan));
-            tv_m.setBackground(getResources().getDrawable(R.drawable.boder_yuan));
-            tv_s.setBackground(getResources().getDrawable(R.drawable.boder_yuan));
-        }
+        this.showBorder_sub = b;
 
     }
 
     public void setShowBorder(boolean b) {
-        if (b)
-            ll_linearlayout.setBackground(getResources().getDrawable(R.drawable.boder_yuan));
+        this.showBorder = b;
     }
 
     //这里开始到最后是倒计时。
@@ -227,5 +208,44 @@ public class CountDownView extends LinearLayout {
             s = String.valueOf(i);
         }
         return s;
+    }
+
+    public void CreatView() {
+        LinearLayout view = new LinearLayout(mContext);
+        LayoutParams lp = (LayoutParams) view.getLayoutParams();
+//        lp.weight = LayoutParams.WRAP_CONTENT;
+//        lp.height = LayoutParams.WRAP_CONTENT;
+//        view.setLayoutParams(lp);
+        tv_h = new TextView(mContext);
+        tv_m = new TextView(mContext);
+        tv_s = new TextView(mContext);
+        tv_colon = new TextView(mContext);
+        tv_colon2 = new TextView(mContext);
+        tv_colon.setText(":");
+        tv_colon2.setText(":");
+        TextView[] textViews = {tv_s, tv_m, tv_h, tv_colon, tv_colon2};
+        TextView[] textViews2 = {tv_s, tv_m, tv_h};
+        for (int i = 0; i < textViews.length; i++) {
+            if (!TextUtils.isEmpty(color_text))
+                textViews[i].setTextColor(Color.parseColor(color_text));
+            if (text_size != 0)
+                textViews[i].setTextSize(text_size);
+        }
+        for (int i = 0; i < textViews2.length; i++) {
+            if (setDrawable_sub != null)
+                textViews[i].setBackground(setDrawable);
+            if (showBorder_sub)
+                textViews[i].setBackground(getResources().getDrawable(R.drawable.boder_yuan));
+        }
+        if (showBorder)
+            view.setBackground(getResources().getDrawable(R.drawable.boder_yuan));
+        if (setDrawable != null)
+            view.setBackground(setDrawable);
+        view.addView(tv_h);
+        view.addView(tv_colon);
+        view.addView(tv_m);
+        view.addView(tv_colon2);
+        view.addView(tv_s);
+        addView(view);
     }
 }
