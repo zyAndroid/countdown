@@ -28,13 +28,12 @@ public class CountDownView extends LinearLayout {
     private Context mContext;
     private String color_bg;
     private String color_text;
-    private int text_size = 14;
+    private int text_size = 18;
     private boolean showBorder = false;
     private boolean showBorder_sub = false;
     private long time_long;
     private int hh = 0, mm = 0, ss = 0;
     private TextView tv_h, tv_s, tv_m, tv_colon, tv_colon2;
-    private LinearLayout ll_linearlayout;
     private Drawable setDrawable;
     private Drawable setDrawable_sub;
 
@@ -66,7 +65,6 @@ public class CountDownView extends LinearLayout {
             setDrawable(setDrawable);
         if (setDrawable_sub != null)
             setDrawable_sub(setDrawable_sub);
-        //
         setShowBorder_sub(showBorder_sub);
         setShowBorder(showBorder);
         typedArray.recycle();
@@ -233,7 +231,7 @@ public class CountDownView extends LinearLayout {
         }
         for (int i = 0; i < textViews2.length; i++) {
             if (setDrawable_sub != null)
-                textViews[i].setBackground(setDrawable);
+                textViews[i].setBackground(setDrawable_sub);
             if (showBorder_sub)
                 textViews[i].setBackground(getResources().getDrawable(R.drawable.boder_yuan));
         }
@@ -241,6 +239,8 @@ public class CountDownView extends LinearLayout {
             view.setBackground(getResources().getDrawable(R.drawable.boder_yuan));
         if (setDrawable != null)
             view.setBackground(setDrawable);
+        if (!TextUtils.isEmpty(color_bg))
+            view.setBackgroundColor(Color.parseColor(color_bg));
         view.addView(tv_h);
         view.addView(tv_colon);
         view.addView(tv_m);
