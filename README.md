@@ -5,6 +5,7 @@
 
 ### 提供了一些方法
 ```java
+
   设置margin
   public void setLinearLayoutMargin(int left, int top, int right, int bottom)
   public void setTextViewMargin(int left, int top, int right, int bottom)
@@ -17,7 +18,15 @@
   设置背景色
   public void setLinearLayoutBgColor(int color)
   public void setTextViewBgColor(int color)
+  
   ```
 ### xml中的一些方法
 ```java
+
+  countdown:color_bg  //设置背景色
+  countdown:color_text  //设置字体颜色
+  countdown:text_size  //设置字体大小
+  countdown:setDrawable  //设置父容器背景
+  countdown:setDrawable_sub  //设置子控件背景
+  
 ```
