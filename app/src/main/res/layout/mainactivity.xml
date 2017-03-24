@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:countdown="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <com.zy.lib.countdown.CountDownView
+        android:id="@+id/csv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        countdown:color_text="@android:color/holo_red_light" />
+
+    <com.zy.lib.countdown.CountDownView
+        android:id="@+id/csv2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        countdown:text_size="30" />
+
+    <com.zy.lib.countdown.CountDownView
+        android:id="@+id/csv3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        countdown:color_bg="@android:color/holo_red_light" />
+
+    <com.zy.lib.countdown.CountDownView
+        android:id="@+id/csv4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        countdown:showBorder="true" />
+
+    <com.zy.lib.countdown.CountDownView
+        android:id="@+id/csv5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        countdown:showBorder_sub="true" />
+
+    <com.zy.lib.countdown.CountDownView
+        android:id="@+id/csv6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        countdown:setDrawable="@drawable/quan" />
+
+    <com.zy.lib.countdown.CountDownView
+        android:id="@+id/csv7"
+        android:layout_width="wrap_content"
+        countdown:setDrawable_sub="@drawable/quan"
+        android:layout_height="wrap_content" />
+
+    <com.zy.lib.countdown.CountDownView
+        android:id="@+id/csv8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <com.zy.lib.countdown.CountDownView
+        android:id="@+id/csv9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <com.zy.lib.countdown.CountDownView
+        android:id="@+id/csv10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</LinearLayout>

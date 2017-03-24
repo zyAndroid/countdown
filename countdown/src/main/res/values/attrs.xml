@@ -3,10 +3,10 @@
     <declare-styleable name="countdown">
         <attr name="color_bg" format="color" />
         <attr name="color_text" format="color" />
-        <attr name="border_sub_color" format="color" />
-        <attr name="border_color" format="color" />
         <attr name="text_size" format="integer" />
         <attr name="showBorder" format="boolean" />
-        <attr name="showBorder_sub" format="boolean"/>
+        <attr name="showBorder_sub" format="boolean" />
+        <attr name="setDrawable" format="reference" />
+        <attr name="setDrawable_sub" format="reference" />
     </declare-styleable>
 </resources>

@@ -3,6 +3,7 @@ package com.zy.lib.countdown;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
@@ -26,8 +27,6 @@ public class CountDownView extends LinearLayout {
     private Context mContext;
     private String color_bg;
     private String color_text;
-    private String border_color;
-    private String border_sub_color;
     private int text_size = 14;
     private boolean showBorder = false;
     private boolean showBorder_sub = false;
@@ -35,6 +34,8 @@ public class CountDownView extends LinearLayout {
     private int hh = 0, mm = 0, ss = 0;
     private TextView tv_h, tv_s, tv_m;
     private LinearLayout ll_linearlayout;
+    private Drawable setDrawable;
+    private Drawable setDrawable_sub;
 
     public CountDownView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -57,21 +58,51 @@ public class CountDownView extends LinearLayout {
         TypedArray typedArray = mContext.obtainStyledAttributes(attrs,
                 R.styleable.countdown);
         color_bg = typedArray.getString(R.styleable.countdown_color_bg);
-        border_color = typedArray.getString(R.styleable.countdown_border_color);
-        border_sub_color = typedArray.getString(R.styleable.countdown_border_sub_color);
         text_size = typedArray.getInteger(R.styleable.countdown_text_size, text_size);
         color_text = typedArray.getString(R.styleable.countdown_color_text);
         showBorder = typedArray.getBoolean(R.styleable.countdown_showBorder, false);
         showBorder_sub = typedArray.getBoolean(R.styleable.countdown_showBorder_sub, false);
-        setShowBorder(showBorder);
+        setDrawable = typedArray.getDrawable(R.styleable.countdown_setDrawable);
+        setDrawable_sub = typedArray.getDrawable(R.styleable.countdown_setDrawable_sub);
+        if (color_bg != null)
+            setColor_bg(color_bg);
+        if (color_text != null)
+            setTextColor(color_text);
+        if (text_size != 0)
+            setTextSize(text_size);
+        if (setDrawable != null)
+            setDrawable(setDrawable);
+        if (setDrawable_sub != null)
+            setDrawable_sub(setDrawable_sub);
+        //
         setShowBorder_sub(showBorder_sub);
-        setTextSize(text_size);
+        setShowBorder(showBorder);
         typedArray.recycle();
     }
 
     public void setStopTime(long time_long) {
+        this.time_long = time_long;
+    }
+
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
         getNetTime getNetTime = new getNetTime();
         getNetTime.execute(time_long);
+    }
+
+    public void setColor_bg(String color_bg) {
+        ll_linearlayout.setBackgroundColor(Color.parseColor(color_bg));
+    }
+
+    public void setDrawable(Drawable drawable) {
+        ll_linearlayout.setBackground(drawable);
+    }
+
+    public void setDrawable_sub(Drawable drawable_sub) {
+        tv_h.setBackground(drawable_sub);
+        tv_m.setBackground(drawable_sub);
+        tv_s.setBackground(drawable_sub);
     }
 
     public void setTextSize(int size) {
