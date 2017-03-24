@@ -30,3 +30,16 @@
   countdown:setDrawable_sub  //设置子控件背景
   
 ```
+### 怎么使用
+```java
+  
+  xml中
+  
+  <com.zy.lib.countdown.CountDownView 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+        
+  Java中
+  csv.setStopTime();//设置一个long类型的停止时间
+  
+```
