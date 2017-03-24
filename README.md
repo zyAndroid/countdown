@@ -40,6 +40,7 @@
         android:layout_height="wrap_content"/>
         
   Java中
-  csv.setStopTime();//设置一个long类型的停止时间
+  
+  setStopTime();//设置一个long类型的停止时间
   
 ```
